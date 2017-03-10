@@ -21,7 +21,7 @@ public class MysqlDAO {
 
 			UserProfile userProfile = couchbaseEntity.getUserProfile();
 			int idFromCouchbase = Integer
-					.valueOf(couchbaseEntity.getKey().substring(couchbaseEntity.getKey().lastIndexOf(":") + 1));
+					.valueOf(couchbaseEntity.getKey());
 
 			String selectQuery = "SELECT * from user_profile where id = ? ";
 			PreparedStatement selectPreparedStmt = conn.prepareStatement(selectQuery);

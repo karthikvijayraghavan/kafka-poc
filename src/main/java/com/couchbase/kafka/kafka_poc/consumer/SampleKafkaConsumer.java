@@ -20,6 +20,8 @@ import com.couchbase.kafka.kafka_poc.consumer.bo.CouchbaseEntity;
 import com.couchbase.kafka.kafka_poc.consumer.mysql.MysqlDAO;
 import com.couchbase.kafka.kafka_poc.consumer.util.JsonToObject;
 
+
+
 public class SampleKafkaConsumer implements Runnable {
 	private final KafkaConsumer<String, String> consumer;
 	private final List<String> topics;
@@ -38,9 +40,11 @@ public class SampleKafkaConsumer implements Runnable {
 
 	public void run() {
 		try {
+			//To begin consumption, you must first subscribe to the topics your application needs to read from.
 			consumer.subscribe(topics);
 
 			while (true) {
+				//The parameter passed to poll controls the maximum amount of time that the consumer will block while it awaits records at the current position.
 				ConsumerRecords<String, String> records = consumer.poll(Long.MAX_VALUE);
 				for (ConsumerRecord<String, String> record : records) {
 					Map<String, Object> data = new HashMap<String, Object>();
@@ -68,7 +72,7 @@ public class SampleKafkaConsumer implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		int numConsumers = 1;
+		int numConsumers = 3;
 		String groupId = null;
 		List<String> topics = null;
 		String kafkaServer = null;

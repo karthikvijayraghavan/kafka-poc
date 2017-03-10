@@ -31,8 +31,6 @@ public class MutationMessageEncoder extends AbstractEncoder {
   public byte[] toBytes(final DCPEvent dcpe) {
       
       MutationMessage cbmsg = (MutationMessage) dcpe.message();
-      System.err.println("UnQuoted String is "+cbmsg.key().toString());
-      System.err.println("Quotes String is "+JSONObject.quote(cbmsg.key().toString()));
       String data = "{\"key\": " +  JSONObject.quote(cbmsg.key().toString())+ ", \"cas\": " +  cbmsg.cas() + ", \"value\": "+ cbmsg.content().toString(CharsetUtil.UTF_8) + "}";
     //  return cbmsg.content().toString(CharsetUtil.UTF_8).getBytes();
       return data.getBytes(CharsetUtil.UTF_8);
